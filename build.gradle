@@ -1,0 +1,46 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.6.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+}
+
+group = 'com.gogosing'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	//ojdbc
+ 	maven { url "https://code.lds.org/nexus/content/groups/main-repo"}
+	//lombok
+ 	maven { url "https://plugins.gradle.org/m2/" }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'com.oracle.database.jdbc:ojdbc8:19.6.0.0'
+	implementation 'com.oracle.database.jdbc:ucp:19.6.0.0'
+	// https://mvnrepository.com/artifact/com.oracle.ojdbc/orai18n
+	compile group: 'com.oracle.ojdbc', name: 'orai18n', version: '19.3.0.0'
+
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+test {
+	useJUnitPlatform()
+}
